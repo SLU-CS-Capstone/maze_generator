@@ -1,4 +1,5 @@
 from graph import Graph
+import matplotlib.pyplot as plt
 
 class Maze:
     def __init__(self, size):
@@ -36,7 +37,35 @@ class Maze:
                 if spanning_tree.has_edge(i, j):
                     self.graph.remove_edge(i, j);
                     
-    def print(self):
+    def print(self, to_file=False):
+        if to_file:
+            print("Saving file..")
+            extended_size = 2*self.size-1
+            array = [[0]*extended_size for _ in range(extended_size)] # extended array for wall fitting
+            for k, v in self.graph.graph.items():
+                x, y = k//self.size * 2, k%self.size * 2
+                for value in v: # check for walls
+                    if value == k+self.size:
+                        array[x+1][y] = 1
+                    if value == k-self.size:
+                        array[x-1][y] = 1
+                    if value == k+1:
+                        array[x][y+1] = 1
+                    if value == k-1:
+                        array[x][y-1] = 1
+
+            for y in range(1, 2*self.size-1): # fill in blanks caused by extending the array
+                for x in range(1, 2*self.size-1):
+                    if x%2 != 0 and y%2 != 0:
+                        array[y][x] = 1
+
+            plt.figure(figsize=(self.size*0.5, self.size*0.5))
+            plt.imshow(array, cmap='binary') # create plot from array
+            plt.xticks([])
+            plt.yticks([])
+            plt.savefig('maze.pdf', format='pdf', bbox_inches='tight')
+            return
+
         result = ' '+('_ ' * (self.size-1))+'_\n'
         for i in range(self.size):
             result+='|'
