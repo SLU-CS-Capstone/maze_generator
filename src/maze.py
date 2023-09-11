@@ -1,4 +1,5 @@
 from graph import Graph
+from export import output_format
 
 class Maze:
     def __init__(self, size):
@@ -58,5 +59,6 @@ class Maze:
                 elif i == self.size-1 and j < self.size-1:
                     result+='_'
             result+='|\n'
-        print(result)
+        output_format(result)
+        
 
