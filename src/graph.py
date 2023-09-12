@@ -1,5 +1,6 @@
 import random
 
+
 class Graph:
     def __init__(self, num_nodes):
         self.num_nodes = num_nodes
@@ -46,4 +47,4 @@ class Graph:
                 stack.pop()
 
         return spanning_tree
-
+    
