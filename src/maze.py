@@ -37,8 +37,8 @@ class Maze:
                 if spanning_tree.has_edge(i, j):
                     self.graph.remove_edge(i, j);
                     
-    def print(self, to_file=False):
-        if to_file:
+    def print(self, to_file="print"):
+        if to_file != "print":
             print("Saving file..")
             extended_size = 2*self.size-1
             array = [[0]*extended_size for _ in range(extended_size)] # extended array for wall fitting
@@ -63,7 +63,7 @@ class Maze:
             plt.imshow(array, cmap='binary') # create plot from array
             plt.xticks([])
             plt.yticks([])
-            plt.savefig('maze.pdf', format='pdf', bbox_inches='tight')
+            plt.savefig(f'maze.{to_file}', format=to_file, bbox_inches='tight')
             return
 
         result = ' '+('_ ' * (self.size-1))+'_\n'

@@ -8,7 +8,7 @@ def get_parsed_args():
     )
     parser.add_argument(
         "--output",
-        choices=["print", "file"],
+        choices=["print", "pdf", "jpg"],
         default="print",
         help="Specify type of output",
     )
@@ -27,7 +27,7 @@ def main():
     args = get_parsed_args()
     maze = Maze(args.size)
     maze.generate_maze()
-    maze.print(to_file=args.output == "file")
+    maze.print(to_file=args.output)
     
 if __name__ == "__main__":
     main()
